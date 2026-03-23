@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+
+contract Box{
+    uint256 private _value;
+    function store(uint256 value) public {
+        _value = value;
+    }
+
+    function retrieve() public view returns(uint256){
+        return _value;
+    }
+}
+
+contract BoxProxy{
+    function _delegate(address implementation) internal virtual{
+        // delegating logic call to boxImpl...
+    }
+
+    function getImplementationAddress() public view returns (address){
+        // Returns the address of the implementation contract
+    }
+
+    fallback() external payable {
+        _delegate(getImplementationAddress());
+     }
+}
